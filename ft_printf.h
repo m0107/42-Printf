@@ -13,8 +13,11 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <libft.h>
+# include "./libft/libft.h"
 # include <stdio.h> 
 # include <stdarg.h>
+
+char	*convert(unsigned int num, int base);
+void	ft_printf(char* format,...);
 
 #endif

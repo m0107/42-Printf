@@ -2,7 +2,7 @@
 
 NAME = libftprintf.a
 CC = gcc  # C compiler
-CFLAGS = -Wall -Werror -Wextra -I. -I libft/. -c  # C flags
+CFLAGS = -Wall -Werror -Wextra -I. -Ilibft/. -c  # C flags
 RM = rm -f   # rm command
 LB_NAME =	libft.a
 LIB_DIR	=	./libft
@@ -31,7 +31,10 @@ ${LIB_DIR}/${LB_NAME}:
 		${MAKE} -C $(LIB_DIR)
 
 $(NAME): $(OBJS) ${LIB_DIR}/${LB_NAME}
-	ar rcs $@ $(OBJS) 
+	cp $(LIB_DIR)/$(LB_NAME) ./$(NAME)
+	ar rc $@ $(OBJS) 
+	/bin/rm -f $(LB_NAME)
+	ranlib $(NAME)
 
 $(OBJS):$(SRCS)
 	$(CC) $(CFLAGS) $(SRCS)
@@ -45,9 +48,11 @@ $(OBJS):$(SRCS)
 
 clean:
 	rm -f $(OBJS) $(B_OBJS)
+	${MAKE} -C $(LIB_DIR) fclean
 
 fclean: clean
 	rm -f $(NAME)
+	${MAKE} -C $(LIB_DIR) fclean
 
 re: fclean all
 
