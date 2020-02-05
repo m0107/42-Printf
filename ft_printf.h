@@ -17,6 +17,16 @@
 # include <stdio.h> 
 # include <stdarg.h>
 
+typedef struct		t_block
+{
+	unsigned int	o_flag;
+	unsigned int	dash_flag;
+	int				min_width;
+	unsigned int	prec_flag;
+	unsigned int	prec_length;
+	char			specifier
+}					s_block;
+
 char	*convert(unsigned int num, int base);
 void	ft_printf(char* format,...);
 
