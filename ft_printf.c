@@ -75,8 +75,8 @@ int  setWidth(char **format)
         (*format)++;
     }
     s[i] = '\0';
-    printf("string for atoit: %s\n",s);
-    printf("int from atoit: %d\n",ft_atoi(s));
+//    printf("string for atoit: %s\n",s);
+//    printf("int from atoit: %d\n",ft_atoi(s));
     return(ft_atoi(s));
 }
 
@@ -96,17 +96,17 @@ s_block getBlock(s_block *block, char **format)
     //while loop to get all blocks;
     if (isFlag(**format))
     {
-        printf("setting flag : %c\n", **format);
+  //      printf("setting flag : %c\n", **format);
         setFlag(block, format);
         
     }
     if (isWidth(**format))
     {
-        printf("setting minfield width : %c\n", **format);
+    //    printf("setting minfield width : %c\n", **format);
         block->min_width = setWidth(format);
     }
     checknSetPrecision(block,format);
-    printf("setting specifier : %c\n", **format);
+    //printf("setting specifier : %c\n", **format);
     block->specifier = **format;
     (*format)++;
     return *block;
@@ -114,7 +114,7 @@ s_block getBlock(s_block *block, char **format)
 
 void initalizeBlock(s_block *block)
 {
-    printf("initalizeBlock\n");
+   // printf("initalizeBlock\n");
     block->dash_flag = 0;
     block->o_flag = 0;
     block->min_width = -1;
