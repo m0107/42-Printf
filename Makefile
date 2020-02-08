@@ -2,7 +2,9 @@
 
 NAME = libftprintf.a
 CC = gcc  # C compiler
-CFLAGS = -Wall -Werror -Wextra -I. -Ilibft/. -c  # C flags
+#CFLAGS = -Wall -Werror -Wextra -I. -Ilibft/. -c  # C flags
+
+CFLAGS =  -I. -Ilibft/. -c  # C flags
 RM = rm -f   # rm command
 LB_NAME =	libft.a
 LIB_DIR	=	./libft

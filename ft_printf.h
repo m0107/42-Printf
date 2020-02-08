@@ -23,8 +23,8 @@ typedef struct		t_block
 	unsigned int	dash_flag;
 	int				min_width;
 	unsigned int	prec_flag;
-	unsigned int	prec_length;
-	char			specifier
+	int				prec_length;
+	char			specifier;
 }					s_block;
 
 char	*convert(unsigned int num, int base);
