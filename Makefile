@@ -21,6 +21,14 @@ ft_lstnew.c \
 ft_lstsize.c \
 
 SRCS = ft_printf.c \
+c_parser.c \
+s_parser.c \
+p_parser.c \
+d_parser.c \
+u_parser.c \
+xX_parser.c \
+per_parser.c \
+
 
 
 OBJS = $(SRCS:.c=.o)

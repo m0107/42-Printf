@@ -29,5 +29,12 @@ typedef struct		t_block
 
 char	*convert(unsigned int num, int base);
 void	ft_printf(char* format,...);
-
+void	c_parser(s_block block, va_list arg);
+void	d_parser(s_block block, va_list arg);
+void	p_parser(s_block block, va_list arg);
+void	per_parser(s_block block, va_list arg);
+void	s_parser(s_block block, va_list arg);
+void	u_parser(s_block block, va_list arg);
+void	x_parser(s_block block, va_list arg);
+void	X_parser(s_block block, va_list arg);
 #endif

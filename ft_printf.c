@@ -136,31 +136,67 @@ s_block createBlock(char **format)
     return block;
 }
 
+char *convert(unsigned int num, int base) 
+{ 
+    static char Representation[]= "0123456789ABCDEF";
+    static char buffer[50]; 
+    char *ptr; 
 
+    ptr = &buffer[49]; 
+    *ptr = '\0'; 
+
+    do 
+    { 
+        *--ptr = Representation[num%base]; 
+        num /= base; 
+    }while(num != 0); 
+
+    return(ptr); 
+}
+
+
+void parseBlock(s_block block, va_list arg)
+{
+    if(block.specifier == 'c') 
+        c_parser(block, arg);
+    else if(block.specifier == 's')
+        s_parser(block, arg);
+    else if(block.specifier == 'p')
+        p_parser(block, arg);
+    else if(block.specifier == 'd' || block.specifier == 'i')
+        d_parser(block, arg);
+    else if(block.specifier == 'u')
+        u_parser(block, arg);
+    else if(block.specifier == 'x')
+        x_parser(block, arg);
+    else if(block.specifier == 'X')
+        X_parser(block, arg);
+    else if(block.specifier == '%')
+        per_parser(block, arg);
+    else 
+        printf("Error in parsing block: unkonwn specifier");
+    
+}
 
 void ft_printf(char* format,...) 
 { 
-    printf("Input : \t%s\n",format);
-   
     s_block  block;
-    //Module 1: Initializing Myprintf's arguments 
     va_list arg; 
     va_start(arg, format);
     while(*format != '\0')
     {
         while(*format != '%'&& *format != '\0')
         {
-            putchar(*format);
+            ft_putchar_fd(*format,1);
             format++;
         }
         if(*format == '\0')
             return;
         block = createBlock(&format);
-        printBlock(block); 
-        //handle block
+       // printBlock(block); 
+     
+        parseBlock(block,arg);
     }   
-    
-    //Module 3: Closing argument list to necessary clean-up
     va_end(arg); 
 } 
 
