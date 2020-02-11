@@ -22,7 +22,7 @@ void printBlock(s_block block)
     printf("min_width %d\n",block.min_width);
     printf("prec_flag %d\n",block.prec_flag);
     printf("prec_length %d\n",block.prec_length);
-    printf("\nBlock info END\n");
+    printf("\nBlock  info END\n");
 }
 int isSpecifier(char c)
 {
