@@ -12,7 +12,7 @@
 
 #include "../ft_printf.h"
 
-void	d_parser(s_block block, va_list arg)
+int	d_parser(s_block block, va_list arg)
 {
 	int i;
 	

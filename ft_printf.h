@@ -25,16 +25,17 @@ typedef struct		t_block
 	unsigned int	prec_flag;
 	int				prec_length;
 	char			specifier;
+	int				length;
 }					s_block;
 
 char	*convert(unsigned int num, int base);
-void	ft_printf(char* format,...);
-void	c_parser(s_block block, va_list arg);
-void	d_parser(s_block block, va_list arg);
-void	p_parser(s_block block, va_list arg);
-void	per_parser(s_block block, va_list arg);
-void	s_parser(s_block block, va_list arg);
-void	u_parser(s_block block, va_list arg);
-void	x_parser(s_block block, va_list arg);
-void	X_parser(s_block block, va_list arg);
+int		ft_printf(char* format,...);
+int		c_parser(s_block block, va_list arg);
+int		d_parser(s_block block, va_list arg);
+int		p_parser(s_block block, va_list arg);
+int		per_parser(s_block block, va_list arg);
+int		s_parser(s_block block, va_list arg);
+int		u_parser(s_block block, va_list arg);
+int		x_parser(s_block block, va_list arg);
+int		X_parser(s_block block, va_list arg);
 #endif

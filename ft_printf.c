@@ -155,33 +155,36 @@ char *convert(unsigned int num, int base)
 }
 
 
-void parseBlock(s_block block, va_list arg)
+int parseBlock(s_block block, va_list arg)
 {
     if(block.specifier == 'c') 
-        c_parser(block, arg);
+        return (c_parser(block, arg));
     else if(block.specifier == 's')
-        s_parser(block, arg);
+        return (s_parser(block, arg));
     else if(block.specifier == 'p')
-        p_parser(block, arg);
+        return (p_parser(block, arg));
     else if(block.specifier == 'd' || block.specifier == 'i')
-        d_parser(block, arg);
+        return (d_parser(block, arg));
     else if(block.specifier == 'u')
-        u_parser(block, arg);
+        return (u_parser(block, arg));
     else if(block.specifier == 'x')
-        x_parser(block, arg);
+        return (x_parser(block, arg));
     else if(block.specifier == 'X')
-        X_parser(block, arg);
+        return (X_parser(block, arg));
     else if(block.specifier == '%')
-        per_parser(block, arg);
+        return (per_parser(block, arg));
     else 
         printf("Error in parsing block: unkonwn specifier");
     
 }
 
-void ft_printf(char* format,...) 
+int ft_printf(char* format,...) 
 { 
     s_block  block;
     va_list arg; 
+    int length;
+
+    length = 0;
     va_start(arg, format);
     while(*format != '\0')
     {
@@ -189,14 +192,14 @@ void ft_printf(char* format,...)
         {
             ft_putchar_fd(*format,1);
             format++;
+            length++;
         }
         if(*format == '\0')
-            return;
+            break;
         block = createBlock(&format);
-       // printBlock(block); 
-     
-        parseBlock(block,arg);
+        length = length + parseBlock(block,arg);
     }   
-    va_end(arg); 
+    va_end(arg);
+    return (length); 
 } 
 

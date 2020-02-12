@@ -12,7 +12,7 @@
 
 #include "../ft_printf.h"
 
-void	x_parser(s_block block, va_list arg)
+int	x_parser(s_block block, va_list arg)
 {
 	int i;
 	
@@ -20,7 +20,7 @@ void	x_parser(s_block block, va_list arg)
 	ft_putchar_fd(i,1);
 }
 
-void	X_parser(s_block block, va_list arg)
+int	X_parser(s_block block, va_list arg)
 {
 	int i;
 	

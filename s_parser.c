@@ -34,7 +34,7 @@ void	checkMaxWidth(char **s, s_block block)
 //	printf("hecking bus error\n");
 //	printf("%s\n",*s);
 }
-void	s_parser(s_block block, va_list arg)
+int	s_parser(s_block block, va_list arg)
 {
 	char  *s;
 	int i;
