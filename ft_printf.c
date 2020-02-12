@@ -197,6 +197,7 @@ int ft_printf(char* format,...)
         if(*format == '\0')
             break;
         block = createBlock(&format);
+        //printBlock(block);
         length = length + parseBlock(block,arg);
     }   
     va_end(arg);
