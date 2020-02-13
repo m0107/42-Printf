@@ -136,25 +136,6 @@ s_block createBlock(char **format)
     return block;
 }
 
-char *convert(unsigned int num, int base) 
-{ 
-    static char Representation[]= "0123456789ABCDEF";
-    static char buffer[50]; 
-    char *ptr; 
-
-    ptr = &buffer[49]; 
-    *ptr = '\0'; 
-
-    do 
-    { 
-        *--ptr = Representation[num%base]; 
-        num /= base; 
-    }while(num != 0); 
-
-    return(ptr); 
-}
-
-
 int parseBlock(s_block block, va_list arg)
 {
     if(block.specifier == 'c') 

@@ -28,14 +28,17 @@ typedef struct		t_block
 	int				length;
 }					s_block;
 
-char	*convert(unsigned int num, int base);
+char	*convert(long long num, int base, s_block block);
 int		ft_printf(char* format,...);
 int		c_parser(s_block block, va_list arg);
 int		d_parser(s_block block, va_list arg);
 int		p_parser(s_block block, va_list arg);
 int		per_parser(s_block block, va_list arg);
 int		s_parser(s_block block, va_list arg);
+int		s_parser_1(char *s, s_block block, int i);
 int		u_parser(s_block block, va_list arg);
 int		x_parser(s_block block, va_list arg);
 int		X_parser(s_block block, va_list arg);
+
+void	printspacehelper(s_block block);
 #endif
