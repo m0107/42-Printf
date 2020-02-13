@@ -155,8 +155,7 @@ int parseBlock(s_block block, va_list arg)
     else if(block.specifier == '%')
         return (per_parser(block, arg));
     else 
-        printf("Error in parsing block: unkonwn specifier");
-    
+        return (0);
 }
 
 int ft_printf(char* format,...) 

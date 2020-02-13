@@ -64,7 +64,7 @@ char	*check_max_width(s_block block, va_list arg)
 int		s_parser_1(char *s, s_block block, int i)
 {
 	//printf("\nDEBUG:s_parser_1: s = :%s\n",s);
-//	printf("\nDEBUG:s_parser_1: block.min_width   = :%d\n",block.min_width);
+	//	printf("\nDEBUG:s_parser_1: block.min_width   = :%d\n",block.min_width);
 	//printf("\nDEBUG:s_parser_1: s.length   = :%zu\n", ft_strlen(s));
 	while (i++ < (block.min_width - ft_strlen(s)) && block.min_width > 0)
 	{
