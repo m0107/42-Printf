@@ -24,10 +24,7 @@ char	*convert_str2no(s_block block, va_list arg)
 
 	i = -1;
 	n = va_arg(arg, int);
-	if (n == NULL)
-		new_str = ft_strdup("0");
-	else
-		new_str = ft_itoa(n);
+	new_str = ft_itoa(n);
 	temp  = new_str;
 	if(*new_str == '0' && block.prec_flag)
 		*new_str = '\0';

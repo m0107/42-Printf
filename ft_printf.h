@@ -33,7 +33,7 @@ int		ft_printf(char* format,...);
 int		c_parser(s_block block, va_list arg);
 int		d_parser(s_block block, va_list arg);
 int		p_parser(s_block block, va_list arg);
-int		per_parser(s_block block, va_list arg);
+int		per_parser(s_block block);
 int		s_parser(s_block block, va_list arg);
 int		s_parser_1(char *s, s_block block, int i);
 int		u_parser(s_block block, va_list arg);

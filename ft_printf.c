@@ -75,69 +75,86 @@ int  setWidth(char **format)
         (*format)++;
     }
     s[i] = '\0';
-//    printf("string for atoit: %s\n",s);
-//    printf("int from atoit: %d\n",ft_atoi(s));
     return(ft_atoi(s));
 }
 
-void checknSetPrecision(s_block *block, char **format)
+void checknSetPrecision(s_block *block, char **format, va_list arg)
 {
     if(**format == '.')
     {
         block->prec_flag = 1;
         (*format)++;
-        block->prec_length = setWidth(format);
+		if(**format == '*')
+		{
+			block->prec_length = va_arg(arg, int);
+			if(block->prec_length <  0)
+			{
+				block->prec_flag = 0;
+				block->prec_length = 0;
+			}
+			(*format)++;
+		}
+		else
+	        block->prec_length = setWidth(format);
     }
 }
 
 
-s_block getBlock(s_block *block, char **format)
+s_block getBlock(s_block *block, char **format, va_list arg)
 {
     //while loop to get all blocks;
     if (isFlag(**format))
-    {
-  //      printf("setting flag : %c\n", **format);
         setFlag(block, format);
-        
-    }
     if (isWidth(**format))
-    {
-    //    printf("setting minfield width : %c\n", **format);
         block->min_width = setWidth(format);
-    }
-    checknSetPrecision(block,format);
+    if(**format =='*')
+	{
+		block->min_width = va_arg(arg, int);
+		(*format)++;	
+	}
+	checknSetPrecision(block,format, arg);
     //printf("setting specifier : %c\n", **format);
     block->specifier = **format;
     (*format)++;
     return *block;
 }
 
-void initalizeBlock(s_block *block)
+void    initalizeBlock(s_block *block)
 {
    // printf("initalizeBlock\n");
     block->dash_flag = 0;
     block->o_flag = 0;
-    block->min_width = -1;
+    block->min_width = 0;
     block->prec_flag = 0;
-    block->prec_length = -1;
+    block->prec_length = 0;
 }
 
-s_block createBlock(char **format)
+s_block createBlock(char **format, va_list arg)
 {
     s_block block;
     initalizeBlock(&block);
-    while(**format != '%')
+    /*while(**format != '%')
     {
         putchar(**format);
         (*format)++;
-    }
+    }*/
     (*format)++;
-    block = getBlock(&block ,format);
+    block = getBlock(&block , format, arg);
     return block;
+}
+
+void rectify_neg_star(s_block *block)
+{
+	if(block->min_width < 0)
+	{
+		block->dash_flag = 1;
+		block->min_width = (-1) * block->min_width;
+	}
 }
 
 int parseBlock(s_block block, va_list arg)
 {
+	rectify_neg_star(&block);
     if(block.specifier == 'c') 
         return (c_parser(block, arg));
     else if(block.specifier == 's')
@@ -153,7 +170,7 @@ int parseBlock(s_block block, va_list arg)
     else if(block.specifier == 'X')
         return (X_parser(block, arg));
     else if(block.specifier == '%')
-        return (per_parser(block, arg));
+        return (per_parser(block));
     else 
         return (0);
 }
@@ -176,7 +193,7 @@ int ft_printf(char* format,...)
         }
         if(*format == '\0')
             break;
-        block = createBlock(&format);
+        block = createBlock(&format, arg);
         //printBlock(block);
         length = length + parseBlock(block,arg);
     }   

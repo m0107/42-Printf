@@ -12,15 +12,14 @@
 
 #include "../ft_printf.h"
 
-int	per_parser(s_block block, va_list arg)
+int	per_parser(s_block block)
 {
 	int			i;
-	long long	l;
 	char		*s;
 
 	i = 0;
 	s = "%";
-	if (block.min_width < ft_strlen(s))
+	if (block.min_width < (int)ft_strlen(s))
 	{
 		ft_putstr_fd(s, 1);
 		i = ft_strlen(s);

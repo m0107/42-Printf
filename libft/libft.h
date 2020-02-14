@@ -59,7 +59,7 @@ char			*ft_strdup(const char *s1);
 char			*ft_strjoin(char const *s1, char const *s2);
 size_t			ft_strlcat(char *d, const char *s, size_t dstsize);
 size_t			ft_strlcpy(char *d, const char *s, size_t dstsize);
-size_t			ft_strlen(const char *s);
+int				ft_strlen(const char *s);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int				ft_strncmp(const char *s1, const char *s2, unsigned int n);
 char			*ft_strnstr(const char *h, const char *n, unsigned int l);
