@@ -180,7 +180,7 @@ int ft_printf(char* format,...)
     s_block  block;
     va_list arg; 
     int length;
-
+	//printf("\nformat:  %s\n",format);
     length = 0;
     va_start(arg, format);
     while(*format != '\0')

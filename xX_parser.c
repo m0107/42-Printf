@@ -15,15 +15,20 @@
 int	x_parser(s_block block, va_list arg)
 {
 	int i;
-	
+	(void)block;
+	(void)arg;
 	i = va_arg(arg,int);
 	ft_putchar_fd(i,1);
+	return 0;
 }
 
 int	X_parser(s_block block, va_list arg)
 {
 	int i;
+	(void)block;
+	(void)arg;
 	
 	i = va_arg(arg,int);
 	ft_putchar_fd(i,1);
+	return 0;
 }

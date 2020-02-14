@@ -15,15 +15,19 @@
 
 char	*convert_str2no_u(s_block block, va_list arg)
 {
-	char 	*s;
-	char	*new_str;
-	int		n;
-	int 	i;
-	char	*temp;
+	char 			*s;
+	char			*new_str;
+	unsigned int	n;
+	int 			i;
+	char			*temp;
 
 	i = -1;
-	n = va_arg(arg, int);
-	new_str = ft_itoa(n);
+	n = va_arg(arg, unsigned int);
+	if(n < 0)
+	{
+		n = 4294967296 - n;
+	}
+	new_str = ft_utoa(n);
 	temp  = new_str;
 	if(*new_str == '0' && block.prec_flag)
 		*new_str = '\0';
