@@ -32,16 +32,18 @@ int isSpecifier(char c)
     return 0;
 }
 
-int isFlag(char c)
+int isFlag(char **format)
 {
-    if(c == '0' || c == '-') 
+	while (**format == ' ')
+			(*format)++;
+    if (**format == '0' || **format == '-') 
         return (1);
     return 0;
 }
 
 void setFlag(s_block *block, char **format)
 {   
-    while(isFlag(**format)) 
+    while(isFlag(format)) 
     {
         //printf("\ndash_flag %d\n",block->dash_flag);
         if (**format == '-')
@@ -78,7 +80,7 @@ int  setWidth(char **format)
     return(ft_atoi(s));
 }
 
-void checknSetPrecision(s_block *block, char **format, va_list arg)
+void checknSetPrecision(s_block *block, char **format, va_list *arg)
 {
     if(**format == '.')
     {
@@ -86,7 +88,7 @@ void checknSetPrecision(s_block *block, char **format, va_list arg)
         (*format)++;
 		if(**format == '*')
 		{
-			block->prec_length = va_arg(arg, int);
+			block->prec_length = va_arg(*arg, int);
 			if(block->prec_length <  0)
 			{
 				block->prec_flag = 0;
@@ -100,16 +102,16 @@ void checknSetPrecision(s_block *block, char **format, va_list arg)
 }
 
 
-s_block getBlock(s_block *block, char **format, va_list arg)
+s_block getBlock(s_block *block, char **format, va_list *arg)
 {
     //while loop to get all blocks;
-    if (isFlag(**format))
+    if (isFlag(format))
         setFlag(block, format);
     if (isWidth(**format))
         block->min_width = setWidth(format);
     if(**format =='*')
 	{
-		block->min_width = va_arg(arg, int);
+		block->min_width = va_arg(*arg, int);
 		(*format)++;	
 	}
 	checknSetPrecision(block,format, arg);
@@ -129,7 +131,7 @@ void    initalizeBlock(s_block *block)
     block->prec_length = 0;
 }
 
-s_block createBlock(char **format, va_list arg)
+s_block createBlock(char **format, va_list *arg)
 {
     s_block block;
     initalizeBlock(&block);
@@ -152,23 +154,23 @@ void rectify_neg_star(s_block *block)
 	}
 }
 
-int parseBlock(s_block block, va_list arg)
+int parseBlock(s_block block, va_list *arg)
 {
 	rectify_neg_star(&block);
     if(block.specifier == 'c') 
-        return (c_parser(block, arg));
+        return (c_parser(block, *arg));
     else if(block.specifier == 's')
-        return (s_parser(block, arg));
+        return (s_parser(block, *arg));
     else if(block.specifier == 'p')
-        return (p_parser(block, arg));
+        return (p_parser(block, *arg));
     else if(block.specifier == 'd' || block.specifier == 'i')
-        return (d_parser(block, arg));
+        return (d_parser(block, *arg));
     else if(block.specifier == 'u')
-        return (u_parser(block, arg));
+        return (u_parser(block, *arg));
     else if(block.specifier == 'x')
-        return (x_parser(block, arg));
+        return (x_parser(block, *arg));
     else if(block.specifier == 'X')
-        return (X_parser(block, arg));
+        return (X_parser(block, *arg));
     else if(block.specifier == '%')
         return (per_parser(block));
     else 
@@ -193,9 +195,9 @@ int ft_printf(char* format,...)
         }
         if(*format == '\0')
             break;
-        block = createBlock(&format, arg);
-        //printBlock(block);
-        length = length + parseBlock(block,arg);
+        block = createBlock(&format, &arg);
+      //  printBlock(block);
+        length = length + parseBlock(block,&arg);
     }   
     va_end(arg);
     return (length); 

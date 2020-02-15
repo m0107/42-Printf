@@ -28,9 +28,9 @@ char	*convert_str2no(s_block block, va_list arg)
 	temp  = new_str;
 	if(*new_str == '0' && block.prec_flag)
 		*new_str = '\0';
-	if (block.prec_flag && block.prec_length > ft_strlen(new_str))
+	if (block.prec_flag && block.prec_length >= ft_strlen(new_str))
 	{
-		s = (char *)malloc(block.prec_length + 2);
+		s = (char *)malloc(block.prec_length + 3);
 		if(*new_str == '-')
 		{
 			s[++i] = '-'; 

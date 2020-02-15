@@ -25,7 +25,6 @@ typedef struct		t_block
 	unsigned int	prec_flag;
 	int				prec_length;
 	char			specifier;
-	int				length;
 }					s_block;
 
 char	*convert(long long num, int base, s_block block);
