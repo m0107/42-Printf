@@ -15,7 +15,7 @@
 static long long	numlen_u(long long temp)
 {
 	long long	ans;
-	long long 	n;
+	long long	n;
 
 	ans = 0;
 	n = temp;
@@ -34,7 +34,7 @@ static long long	numlen_u(long long temp)
 	return (ans);
 }
 
-static char	*handleintmin(char *ans)
+static char			*handleintmin(char *ans)
 {
 	ans[0] = '-';
 	ans[1] = '2';
@@ -51,7 +51,7 @@ static char	*handleintmin(char *ans)
 	return (ans);
 }
 
-char		*ft_utoa(long long n)
+char				*ft_utoa(long long n)
 {
 	char		*ans;
 	long long	i;
