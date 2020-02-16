@@ -27,7 +27,16 @@ typedef struct		s_block
 	unsigned int	prec_flag;
 }					t_block;
 
+void				init_block(t_block *block);
+t_block				create_block(char **format, va_list *arg);
+void				rectify_neg_star(t_block *block);
+int					parse_block(t_block block, va_list *arg);
 int					ft_printf(char *format, ...);
+int					is_flag(char **format);
+void				set_flag(t_block *block, char **format);
+int					is_width(char c);
+int					set_width(char **format);
+void				chk_set_prec(t_block *block, char **format, va_list *arg);
 int					c_parser(t_block block, va_list arg);
 int					d_parser(t_block block, va_list arg);
 int					p_parser(t_block block, va_list arg);

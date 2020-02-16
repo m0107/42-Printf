@@ -28,6 +28,7 @@ d_parser.c \
 u_parser.c \
 x_parser.c \
 per_parser.c \
+ft_printf1.c \
 
 
 
