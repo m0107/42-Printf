@@ -26,7 +26,7 @@ s_parser.c \
 p_parser.c \
 d_parser.c \
 u_parser.c \
-xX_parser.c \
+x_parser.c \
 per_parser.c \
 
 

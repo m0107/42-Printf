@@ -12,7 +12,7 @@
 
 #include "../ft_printf.h"
 
-int	per_parser(s_block block)
+int	per_parser(t_block block)
 {
 	int			i;
 	char		*s;

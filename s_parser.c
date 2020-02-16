@@ -27,7 +27,7 @@ char	*create_null_str(void)
 	return (s);
 }
 
-void	printspacehelper(s_block block)
+void	printspacehelper(t_block block)
 {
 	if (block.o_flag)
 		ft_putchar_fd('0', 1);
@@ -35,7 +35,7 @@ void	printspacehelper(s_block block)
 		ft_putchar_fd(' ', 1);
 }
 
-char	*check_max_width(s_block block, va_list arg)
+char	*check_max_width(t_block block, va_list arg)
 {
 	int		i;
 	char	*new_str;
@@ -61,7 +61,7 @@ char	*check_max_width(s_block block, va_list arg)
 	return (new_str);
 }
 
-int		s_parser_1(char *s, s_block block, int i)
+int		s_parser_1(char *s, t_block block, int i)
 {
 	while (i++ < (block.min_width - ft_strlen(s)) && block.min_width > 0)
 	{
@@ -72,7 +72,7 @@ int		s_parser_1(char *s, s_block block, int i)
 	return (i);
 }
 
-int		s_parser(s_block block, va_list arg)
+int		s_parser(t_block block, va_list arg)
 {
 	char	*s;
 	int		i;

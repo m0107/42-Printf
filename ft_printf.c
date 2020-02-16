@@ -13,7 +13,7 @@
 
 #include "ft_printf.h"
 
-void printBlock(s_block block)
+void printBlock(t_block block)
 {
     printf("\nBlock info START\n\n");
     printf("o_flag %d\n",block.o_flag);
@@ -41,7 +41,7 @@ int isFlag(char **format)
     return 0;
 }
 
-void setFlag(s_block *block, char **format)
+void setFlag(t_block *block, char **format)
 {   
     while(isFlag(format)) 
     {
@@ -80,7 +80,7 @@ int  setWidth(char **format)
     return(ft_atoi(s));
 }
 
-void checknSetPrecision(s_block *block, char **format, va_list *arg)
+void checknSetPrecision(t_block *block, char **format, va_list *arg)
 {
     if(**format == '.')
     {
@@ -102,7 +102,7 @@ void checknSetPrecision(s_block *block, char **format, va_list *arg)
 }
 
 
-s_block getBlock(s_block *block, char **format, va_list *arg)
+t_block getBlock(t_block *block, char **format, va_list *arg)
 {
     //while loop to get all blocks;
     if (isFlag(format))
@@ -121,7 +121,7 @@ s_block getBlock(s_block *block, char **format, va_list *arg)
     return *block;
 }
 
-void    initalizeBlock(s_block *block)
+void    initalizeBlock(t_block *block)
 {
    // printf("initalizeBlock\n");
     block->dash_flag = 0;
@@ -131,9 +131,9 @@ void    initalizeBlock(s_block *block)
     block->prec_length = 0;
 }
 
-s_block createBlock(char **format, va_list *arg)
+t_block createBlock(char **format, va_list *arg)
 {
-    s_block block;
+    t_block block;
     initalizeBlock(&block);
     /*while(**format != '%')
     {
@@ -145,7 +145,7 @@ s_block createBlock(char **format, va_list *arg)
     return block;
 }
 
-void rectify_neg_star(s_block *block)
+void rectify_neg_star(t_block *block)
 {
 	if(block->min_width < 0)
 	{
@@ -154,7 +154,7 @@ void rectify_neg_star(s_block *block)
 	}
 }
 
-int parseBlock(s_block block, va_list *arg)
+int parseBlock(t_block block, va_list *arg)
 {
 	rectify_neg_star(&block);
     if(block.specifier == 'c') 
@@ -170,7 +170,7 @@ int parseBlock(s_block block, va_list *arg)
     else if(block.specifier == 'x')
         return (x_parser(block, *arg));
     else if(block.specifier == 'X')
-        return (X_parser(block, *arg));
+        return (xx_parser(block, *arg));
     else if(block.specifier == '%')
         return (per_parser(block));
     else 
@@ -179,7 +179,7 @@ int parseBlock(s_block block, va_list *arg)
 
 int ft_printf(char* format,...) 
 { 
-    s_block  block;
+    t_block  block;
     va_list arg; 
     int length;
 	//printf("\nformat:  %s\n",format);

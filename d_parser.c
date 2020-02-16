@@ -12,7 +12,7 @@
 
 #include "../ft_printf.h"
 
-char	*convert_str2no_1(s_block block, char *new_str, char *temp)
+char	*convert_str2no_1(t_block block, char *new_str, char *temp)
 {
 	char	*s;
 	int		i;
@@ -34,7 +34,7 @@ char	*convert_str2no_1(s_block block, char *new_str, char *temp)
 	return (s);
 }
 
-char	*convert_str2no(s_block block, va_list arg)
+char	*convert_str2no(t_block block, va_list arg)
 {
 	char	*new_str;
 	int		n;
@@ -52,7 +52,7 @@ char	*convert_str2no(s_block block, va_list arg)
 	return (new_str);
 }
 
-void	printspacehelper_d(s_block block)
+void	printspacehelper_d(t_block block)
 {
 	if (block.o_flag && !block.prec_flag)
 		ft_putchar_fd('0', 1);
@@ -60,7 +60,7 @@ void	printspacehelper_d(s_block block)
 		ft_putchar_fd(' ', 1);
 }
 
-int		d_parser_1(char *s, s_block block, int i)
+int		d_parser_1(char *s, t_block block, int i)
 {
 	if (*s == '-' && (block.dash_flag || (block.o_flag && !block.prec_flag)))
 	{
@@ -75,7 +75,7 @@ int		d_parser_1(char *s, s_block block, int i)
 	return (i);
 }
 
-int		d_parser(s_block block, va_list arg)
+int		d_parser(t_block block, va_list arg)
 {
 	char	*s;
 	int		i;

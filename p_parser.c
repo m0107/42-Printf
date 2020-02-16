@@ -6,48 +6,45 @@
 /*   By: mgupta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 21:08:52 by mgupta            #+#    #+#             */
-/*   Updated: 2020/02/11 21:08:54 by mgupta           ###   ########.fr       */
+/*   Updated: 2020/02/16 01:34:31 by mgupta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
+char	*convert(long long num, int base, t_block block)
+{
+	static char	*representation;
+	static char	buffer[50];
+	char		*ptr;
 
-
-char *convert(long long num, int base, s_block block) 
-{ 
-    static char Representation[]= "0123456789abcdef";
-    static char buffer[50]; 
-    char *ptr; 
-
-    ptr = &buffer[49]; 
-    *ptr = '\0'; 
-
-    do 
-    { 
-        *--ptr = Representation[num%base]; 
-        num /= base; 
-    }while(num != 0); 
+	representation = ft_strdup("0123456789abcdef");
+	ptr = &buffer[49];
+	*ptr = '\0';
+	while (1)
+	{
+		*--ptr = representation[num % base];
+		num /= base;
+		if (num == 0)
+			break ;
+	}
 	*--ptr = 'x';
 	*--ptr = '0';
-	if(ft_strlen(ptr) < 4 && block.prec_flag)
+	if (ft_strlen(ptr) < 4 && block.prec_flag)
 		ptr[2] = '\0';
-    return(ptr); 
+	free(representation);
+	return (ptr);
 }
 
-
-int		p_parser(s_block block, va_list arg)
+int		p_parser(t_block block, va_list arg)
 {
 	int			i;
 	long long	l;
-	char *s;
-	
+	char		*s;
+
 	i = 0;
 	l = va_arg(arg, unsigned long long);
-	s = convert(l,16, block);
-	
-	//printf("\nDEBUG: s = :%s\n",s);
-	//printf("\nDEBUG: s.length = :%zu\n",ft_strlen(s));
+	s = convert(l, 16, block);
 	if (block.min_width < ft_strlen(s))
 	{
 		ft_putstr_fd(s, 1);
